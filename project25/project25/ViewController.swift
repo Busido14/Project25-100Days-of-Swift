@@ -21,9 +21,13 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         super.viewDidLoad()
         
         title = "Selfie Share"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
+        let buttonCamera = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
+        let buttonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
+        let buttonText = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(sendText))
+        let buttonConnections = UIBarButtonItem(title: "Connection", style: .plain, target: self, action: #selector(lookToConnections))
         
+        navigationItem.rightBarButtonItems = [buttonCamera, buttonText]
+        navigationItem.leftBarButtonItems = [buttonAdd, buttonConnections]
         
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession?.delegate = self
@@ -143,6 +147,14 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
                 self?.collectionView.reloadData()
             }
         }
+    }
+    
+    @objc func sendText() {
+        
+    }
+    
+    @objc func lookToConnections() {
+        
     }
 }
 
